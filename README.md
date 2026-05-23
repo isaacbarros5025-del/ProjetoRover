@@ -76,4 +76,10 @@ Projeto desenvolvido por:
 - Gustavo  Silva  dos  anjos
 - Isaac Barros de Lima  
 - João Pedro Cruz Oliveira  
-- Júlio Cesar Dos Santos Nascimento  
+- Júlio Cesar Dos Santos Nascimento
+
+## 🚀 Demonstração online
+
+👉 Acesse o sistema rodando ao vivo:
+
+[🔗 Abrir Projeto Rover Lunar](https://rover-lunar-system.streamlit.app/)
