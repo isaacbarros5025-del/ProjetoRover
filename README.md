@@ -40,7 +40,7 @@ projeto-rover/
 ### 1. Instalar dependências
 
 - pip install -r requirements.txt
-    - 2. Rodar a aplicação
+    - Rodar a aplicação:
     - streamlit run main.py
     - 👥 Funcionalidades
     - 🔐 Usuários
