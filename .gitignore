@@ -1,0 +1,7 @@
+*venv/
+__pycache__/
+*.pyc
+
+controle.py
+*.pyc
+__pycache__/

@@ -8,20 +8,7 @@ st.set_page_config(
     page_icon="🚀",
     layout="wide"
 )
-
-# CONEXÃO SOCKET
-
-#if "cliente" not in st.session_state:
-    #try:
-        #cliente = socket.socket()
-       # cliente.settimeout(2.0) 
-        #cliente.connect(("192.168.0.116", 5000))  # trocar pelo IP do rover
-        #st.session_state.cliente = cliente
-
-    #except Exception as e:
-        #st.session_state.cliente = None
         
-
 # BANCO DE DADOS (rover.db)
 
 conn = sqlite3.connect("rover.db", check_same_thread=False)
