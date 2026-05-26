@@ -119,7 +119,10 @@ Caso apareça erro de permissão no PowerShell:
 
 ## 7️⃣ Executar o projeto
 - streamlit run main.py
-📦 Dependências
+
+---
+
+# 📦 Dependências
 
 ## Exemplo do requirements.txt:
 
