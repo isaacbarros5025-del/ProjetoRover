@@ -100,7 +100,7 @@ https://www.python.org/downloads/
 - ✅ Add Python to PATH
  
 ## 2️⃣ Clonar o repositório
-- git clone https://github.com/seu-usuario/projeto-rover.git
+- git clone https://github.com/isaacbarros5025-del/ProjetoRoverLunar.git
 
 ## 3️⃣ Entrar na pasta
 - cd projeto-rover
