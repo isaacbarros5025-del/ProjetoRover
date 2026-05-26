@@ -74,6 +74,8 @@ O Streamlit envia comandos:
 
 O ESP32 recebe os comandos e executa os movimentos do rover.
 
+---
+
 # 🗂 Estrutura do Projeto
 - ProjetoRover/
 - │
@@ -83,7 +85,10 @@ O ESP32 recebe os comandos e executa os movimentos do rover.
 - ├── README.md
 - └── venv/
 
+---
+
 # ▶ Como Executar
+
 ## 1️⃣ Instalar o Python
 
 - Baixe e instale o Python:
@@ -127,12 +132,16 @@ Caso apareça erro de permissão no PowerShell:
 - Bateria
 - Rede Wi-Fi local
 
+---
+
 # 👨‍💻 Equipe de Desenvolvimento
 - DIEGO RODRIGUES COSTA DE OLIVEIRA CASTRO
 - GUSTAVO SILVA DOS ANJOS
 - ISAAC BARROS DE LIMA
 - JOÃO PEDRO CRUZ OLIVEIRA
 - JÚLIO CESAR DOS SANTOS NASCIMENTO
+
+---
 
 # 📄 Licença
 
