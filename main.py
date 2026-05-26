@@ -1,8 +1,6 @@
 import streamlit as st
 import sqlite3
-
-
-# CONFIGURAÇÃO DA PÁGINA
+import socket
 
 st.set_page_config(
     page_title="Projeto Rover Lunar",
@@ -10,6 +8,18 @@ st.set_page_config(
     layout="wide"
 )
 
+# CONEXÃO SOCKET
+
+if "cliente" not in st.session_state:
+    try:
+        cliente = socket.socket()
+        cliente.settimeout(2.0) 
+        cliente.connect(("192.168.0.116", 5000))  # trocar pelo IP do rover
+        st.session_state.cliente = cliente
+
+    except Exception as e:
+        st.session_state.cliente = None
+        
 
 # BANCO DE DADOS (rover.db)
 
@@ -101,17 +111,12 @@ if "usuario" not in st.session_state:
 # HOME
 
 if st.session_state.pagina == "home":
-
     st.title("🚀 Projeto Rover Lunar")
-
     st.markdown("---")
-
     st.subheader("Sistema de Gerenciamento de Rovers")
-
     st.write("""
     Plataforma desenvolvida para gerenciamento de equipes e rovers.
     """)
-
     st.markdown("---")
 
     col1, col2 = st.columns(2)
@@ -130,7 +135,6 @@ if st.session_state.pagina == "home":
 # CADASTRO
 
 elif st.session_state.pagina == "cadastro":
-
     st.title("📝 Cadastro")
 
     usuario = st.text_input("Nome de usuário")
@@ -139,11 +143,8 @@ elif st.session_state.pagina == "cadastro":
     col1, col2 = st.columns(2)
 
     with col1:
-
         if st.button("Cadastrar", use_container_width=True):
-
             usuarios = carregar_usuarios()
-
             existe = False
 
             for u in usuarios:
@@ -152,24 +153,17 @@ elif st.session_state.pagina == "cadastro":
 
             if usuario == "" or senha == "":
                 st.warning("Preencha todos os campos!")
-
             elif existe:
                 st.error("Usuário já existe!")
-
             else:
-
                 salvar_usuario(usuario, senha)
-
                 st.session_state.logado = True
                 st.session_state.usuario = usuario
                 st.session_state.pagina = "painel"
-
                 st.success("Cadastro realizado!")
-
                 st.rerun()
 
     with col2:
-
         if st.button("⬅ Voltar", use_container_width=True):
             st.session_state.pagina = "home"
             st.rerun()
@@ -178,7 +172,6 @@ elif st.session_state.pagina == "cadastro":
 # LOGIN
 
 elif st.session_state.pagina == "login":
-
     st.title("🔐 Login")
 
     usuario = st.text_input("Usuário")
@@ -187,11 +180,8 @@ elif st.session_state.pagina == "login":
     col1, col2 = st.columns(2)
 
     with col1:
-
         if st.button("Entrar", use_container_width=True):
-
             usuarios = carregar_usuarios()
-
             login_ok = False
 
             for u in usuarios:
@@ -202,15 +192,12 @@ elif st.session_state.pagina == "login":
                 st.session_state.logado = True
                 st.session_state.usuario = usuario
                 st.session_state.pagina = "painel"
-
                 st.success("Login realizado!")
                 st.rerun()
-
             else:
                 st.error("Usuário ou senha incorretos!")
 
     with col2:
-
         if st.button("⬅ Voltar", use_container_width=True):
             st.session_state.pagina = "home"
             st.rerun()
@@ -219,13 +206,11 @@ elif st.session_state.pagina == "login":
 # PAINEL
 
 elif st.session_state.pagina == "painel":
-
     if not st.session_state.logado:
         st.session_state.pagina = "login"
         st.rerun()
 
     st.sidebar.title("🚀 Menu")
-
     menu = st.sidebar.radio(
         "Navegação",
         ["Dashboard", "Cadastrar Rover", "Área de Controle", "Rovers Cadastrados"]
@@ -241,15 +226,11 @@ elif st.session_state.pagina == "painel":
 
     
     # DASHBOARD
-   
+    
     if menu == "Dashboard":
-
         st.title("📊 Dashboard")
-
         rovers = carregar_rovers()
-
         st.metric("Total de Rovers", len(rovers))
-
         st.subheader("Últimos Rovers")
 
         for r in rovers[-3:]:
@@ -257,9 +238,8 @@ elif st.session_state.pagina == "painel":
 
 
     # CADASTRAR ROVER
-
+    
     elif menu == "Cadastrar Rover":
-
         st.title("🚗 Cadastro de Rover")
 
         nome_rover = st.text_input("Nome do Rover")
@@ -278,12 +258,9 @@ elif st.session_state.pagina == "painel":
         )
 
         if st.button("Salvar Rover", use_container_width=True):
-
             if nome_rover == "" or equipe == "" or descricao == "":
                 st.warning("Preencha os campos obrigatórios!")
-
             else:
-
                 salvar_rover((
                     nome_rover,
                     equipe,
@@ -293,69 +270,85 @@ elif st.session_state.pagina == "painel":
                     status,
                     st.session_state.usuario
                 ))
-
                 st.success("Rover cadastrado com sucesso!")
 
    
     # ÁREA DE CONTROLE 
-   
-
     elif menu == "Área de Controle":
-
         st.title("🎮 Área de Controle")
+        cliente = st.session_state.get("cliente", None)
 
         col1, col2, col3 = st.columns(3)
 
         with col2:
-            if st.button("⬆ FRENTE"):
-                print("Comando executado: FRENTE")
-                st.success("Comando enviado: Frente")
+            if st.button("⬆ FRENTE", use_container_width=True):
+                if cliente:
+                    try:
+                        cliente.send(b"w")
+                        st.success("Frente enviada")
+                    except:
+                        st.error("Erro ao enviar comando.")
 
         with col1:
-            if st.button("⬅ ESQUERDA"):
-                print("Comando executado: ESQUERDA")
-                st.success("Comando enviado: Esquerda")
+            if st.button("⬅ ESQUERDA", use_container_width=True):
+                if cliente:
+                    try:
+                        cliente.send(b"a")
+                        st.success("Esquerda enviada")
+                    except:
+                        st.error("Erro ao enviar comando.")
 
         with col3:
-            if st.button("➡ DIREITA"):
-                print("Comando executado: DIREITA")
-                st.success("Comando enviado: Direita")
+            if st.button("➡ DIREITA", use_container_width=True):
+                if cliente:
+                    try:
+                        cliente.send(b"d")
+                        st.success("Direita enviada")
+                    except:
+                        st.error("Erro ao enviar comando.")
 
         col4, col5, col6 = st.columns(3)
 
         with col5:
-            if st.button("⬇ TRÁS"):
-                print("Comando executado: TRÁS")
-                st.success("Comando enviado: Ré")
+            if st.button("⬇ TRÁS", use_container_width=True):
+                if cliente:
+                    try:
+                        cliente.send(b"s")
+                        st.success("Ré enviada")
+                    except:
+                        st.error("Erro ao enviar comando.")
 
-        if st.button("🛑 PARAR"):
-            print("Comando executado: ROVER PARADO")
-            st.error("Rover parado")
+        if st.button("🛑 PARAR", use_container_width=True):
+            if cliente:
+                try:
+                    cliente.send(b"p")
+                    st.error("Rover parado")
+                except:
+                    st.error("Erro ao enviar comando.")
 
         st.markdown("---")
-
         st.subheader("📡 Status do Sistema")
-
-        st.write("✅ Comunicação ativa")
-        st.write("📶 Rede LAN conectada")
-        st.write("🤖 Rover online")
+        
+        if cliente:
+            st.write("✅ Comunicação ativa")
+            st.write("📶 Rede LAN conectada")
+            st.write("🤖 Rover online")
+        else:
+            st.write("❌ Desconectado do Rover")
 
   
     # ROVERS CADASTRADOS
- 
+    
     elif menu == "Rovers Cadastrados":
-
         st.title("🚘 Rovers Cadastrados")
-
         rovers = carregar_rovers()
 
         for rover in rovers:
-
             with st.expander(f"{rover['rover']} - {rover['equipe']}"):
-
+                
                 # BOTÃO DE EXCLUIR
+                
                 if rover["usuario"] == st.session_state.usuario:
-
                     if st.button(f"🗑 Excluir {rover['rover']}"):
                         deletar_rover(rover["rover"], st.session_state.usuario)
                         st.success("Rover excluído com sucesso!")

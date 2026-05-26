@@ -1,85 +1,130 @@
 # 🚀 Projeto Rover Lunar
 
-Sistema de gerenciamento de rovers desenvolvido com Python + Streamlit + SQLite.
+Sistema web desenvolvido com Python + Streamlit para gerenciamento e controle remoto de um Rover Lunar utilizando comunicação via Socket TCP/IP com ESP32/Arduino.
 
+---
 
-## 📌 Sobre o projeto
+# 📌 Sobre o Projeto
 
-O Projeto Rover Lunar é uma aplicação web que permite:
+O sistema permite:
 
-- Cadastro de usuários
-- Login de usuários
-- Cadastro de rovers por equipe
-- Visualização de rovers cadastrados
-- Controle básico de um rover (simulação)
-- Exclusão de rovers cadastrados
+- 👤 Cadastro e login de usuários
+- 🚗 Cadastro de rovers
+- 📊 Dashboard com informações dos projetos
+- 🎮 Controle remoto do rover via navegador
+- 📡 Comunicação em tempo real com ESP32/Arduino
+- 🗑 Exclusão de rovers cadastrados
 
-O sistema utiliza banco de dados local SQLite para armazenamento das informações.
+---
 
+# 🛠 Tecnologias Utilizadas
 
-## 🛠️ Tecnologias utilizadas
+- 🐍 Python
+- 🌐 Streamlit
+- 🗄 SQLite
+- 📡 Socket TCP/IP
+- 🤖 ESP32 / Arduino IDE
 
-- Python 🐍
-- Streamlit 🌐
-- SQLite 🗄️
+---
 
+# 🎮 Funcionalidades
 
-## 📁 Estrutura do projeto
+## 🔐 Sistema de Login
+Usuários podem criar contas e acessar o sistema.
 
+## 🚗 Cadastro de Rover
+Permite registrar:
+- Nome do rover
+- Equipe
+- Integrantes
+- Linguagem utilizada
+- Status do projeto
+- Descrição
 
-projeto-rover/
-- │
-- ├── main.py
-- ├── rover.db
-- ├── requirements.txt
-- └── README.md
+## 📊 Dashboard
+Exibe:
+- Quantidade total de rovers
+- Últimos projetos cadastrados
 
+## 🎮 Área de Controle
+Controle remoto do rover com comandos:
 
-## ▶️ Como executar o projeto
+- ⬆ Frente
+- ⬇ Ré
+- ⬅ Esquerda
+- ➡ Direita
+- 🛑 Parar
 
-### 1. Instalar dependências
+Os comandos são enviados via Socket TCP/IP para o ESP32.
 
-- pip install -r requirements.txt
-    - Rodar aplicação:
-    - streamlit run main.py
-    - 👥 Funcionalidades
-    - 🔐 Usuários
-    - Criar conta
-    - Fazer login
-    - 🚗 Rovers
-    - Cadastrar rover
-    - Visualizar rovers cadastrados
-    - Excluir rover (apenas o criador)
-    - 🎮 Controle
-    - Simulação de comandos (frente, trás, esquerda, direita, parar)
-    - 💾 Banco de dados
+---
 
-O projeto utiliza SQLite com duas tabelas:
+# 📡 Comunicação Rover ↔ Sistema
 
-- usuarios
-- rovers
+O sistema utiliza comunicação TCP/IP.
 
-Os dados são salvos localmente no arquivo:
+O Streamlit envia comandos:
 
-- rover.db
+```python
+w = frente
+s = trás
+a = esquerda
+d = direita
+p = parar
 
-📚 Observações
-- Projeto desenvolvido para fins acadêmicos
-- Foco em aprendizado de desenvolvimento web com Python
-- Não possui integração com hardware real (apenas simulação)
+O ESP32 recebe os comandos e executa os movimentos do rover.
 
-## 👨‍💻 Equipe
+🗂 Estrutura do Projeto
+ProjetoRover/
+│
+├── main.py
+├── rover.db
+├── requirements.txt
+├── README.md
+└── venv/
+▶ Como Executar
+1️⃣ Instalar o Python
 
-Projeto desenvolvido por:
+Baixe e instale o Python:
 
-- Diego Rodrigues Costa de Oliveira Castro  
-- Gustavo  Silva  dos  anjos
-- Isaac Barros de Lima  
-- João Pedro Cruz Oliveira  
-- Júlio Cesar Dos Santos Nascimento
+https://www.python.org/downloads/
 
-## 🚀 Demonstração online
+⚠ Durante a instalação marque:
 
-👉 Acesse o sistema rodando ao vivo:
+✅ Add Python to PATH
+2️⃣ Clonar o repositório
+git clone https://github.com/seu-usuario/projeto-rover.git
+3️⃣ Entrar na pasta
+cd projeto-rover
+4️⃣ Criar ambiente virtual
+python -m venv venv
+5️⃣ Ativar ambiente virtual
+Windows
+venv\Scripts\activate
+Caso apareça erro de permissão no PowerShell:
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+6️⃣ Instalar dependências
+pip install -r requirements.txt
+7️⃣ Executar o projeto
+streamlit run main.py
+📦 Dependências
 
-[🔗 Abrir Projeto Rover Lunar](https://rover-lunar-system.streamlit.app/)
+Exemplo do requirements.txt:
+
+streamlit
+🤖 Hardware Utilizado
+ESP32
+Ponte H
+Motores DC
+Chassi Rover
+Bateria
+Rede Wi-Fi local
+👨‍💻 Equipe de Desenvolvimento
+DIEGO RODRIGUES COSTA DE OLIVEIRA CASTRO
+GUSTAVO SILVA DOS ANJOS
+ISAAC BARROS DE LIMA
+JOÃO PEDRO CRUZ OLIVEIRA
+JÚLIO CESAR DOS SANTOS NASCIMENTO
+📄 Licença
+
+Projeto desenvolvido para fins educacionais.
