@@ -74,7 +74,7 @@ O Streamlit envia comandos:
 
 O ESP32 recebe os comandos e executa os movimentos do rover.
 
-🗂 Estrutura do Projeto
+# 🗂 Estrutura do Projeto
 - ProjetoRover/
 - │
 - ├── main.py
@@ -83,8 +83,8 @@ O ESP32 recebe os comandos e executa os movimentos do rover.
 - ├── README.md
 - └── venv/
 
-▶ Como Executar
-- 1️⃣ Instalar o Python
+# ▶ Como Executar
+## 1️⃣ Instalar o Python
 
 - Baixe e instale o Python:
 
@@ -94,25 +94,29 @@ https://www.python.org/downloads/
 
 - ✅ Add Python to PATH
  
-2️⃣ Clonar o repositório
-git clone https://github.com/seu-usuario/projeto-rover.git
+## 2️⃣ Clonar o repositório
+- git clone https://github.com/seu-usuario/projeto-rover.git
 
-3️⃣ Entrar na pasta
+## 3️⃣ Entrar na pasta
 - cd projeto-rover
-4️⃣ Criar ambiente virtual
+
+## 4️⃣ Criar ambiente virtual
 - python -m venv venv
-5️⃣ Ativar ambiente virtual
+
+## 5️⃣ Ativar ambiente virtual
 - Windows
 - venv\Scripts\activate
 Caso apareça erro de permissão no PowerShell:
 - Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-6️⃣ Instalar dependências
+
+## 6️⃣ Instalar dependências
 - pip install -r requirements.txt
-7️⃣ Executar o projeto
+
+## 7️⃣ Executar o projeto
 - streamlit run main.py
 📦 Dependências
 
-Exemplo do requirements.txt:
+## Exemplo do requirements.txt:
 
 - streamlit
 - 🤖 Hardware Utilizado
@@ -123,12 +127,13 @@ Exemplo do requirements.txt:
 - Bateria
 - Rede Wi-Fi local
 
-👨‍💻 Equipe de Desenvolvimento
+# 👨‍💻 Equipe de Desenvolvimento
 - DIEGO RODRIGUES COSTA DE OLIVEIRA CASTRO
 - GUSTAVO SILVA DOS ANJOS
 - ISAAC BARROS DE LIMA
 - JOÃO PEDRO CRUZ OLIVEIRA
 - JÚLIO CESAR DOS SANTOS NASCIMENTO
-📄 Licença
+
+# 📄 Licença
 
 Projeto desenvolvido para fins educacionais.
