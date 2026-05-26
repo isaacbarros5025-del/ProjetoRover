@@ -66,65 +66,69 @@ O sistema utiliza comunicação TCP/IP.
 O Streamlit envia comandos:
 
 
-w = frente
-s = trás
-a = esquerda
-d = direita
-p = parar
+- w = frente
+- s = trás
+- a = esquerda
+- d = direita
+- p = parar
 
 O ESP32 recebe os comandos e executa os movimentos do rover.
 
 🗂 Estrutura do Projeto
-ProjetoRover/
-│
-├── main.py
-├── rover.db
-├── requirements.txt
-├── README.md
-└── venv/
-▶ Como Executar
-1️⃣ Instalar o Python
+- ProjetoRover/
+- │
+- ├── main.py
+- ├── rover.db
+- ├── requirements.txt
+- ├── README.md
+- └── venv/
 
-Baixe e instale o Python:
+▶ Como Executar
+- 1️⃣ Instalar o Python
+
+- Baixe e instale o Python:
 
 https://www.python.org/downloads/
 
-⚠ Durante a instalação marque:
+- ⚠ Durante a instalação marque:
 
-✅ Add Python to PATH
+- ✅ Add Python to PATH
+ 
 2️⃣ Clonar o repositório
 git clone https://github.com/seu-usuario/projeto-rover.git
+
 3️⃣ Entrar na pasta
-cd projeto-rover
+- cd projeto-rover
 4️⃣ Criar ambiente virtual
-python -m venv venv
+- python -m venv venv
 5️⃣ Ativar ambiente virtual
-Windows
-venv\Scripts\activate
+- Windows
+- venv\Scripts\activate
 Caso apareça erro de permissão no PowerShell:
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+- Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 6️⃣ Instalar dependências
-pip install -r requirements.txt
+- pip install -r requirements.txt
 7️⃣ Executar o projeto
-streamlit run main.py
+- streamlit run main.py
 📦 Dependências
 
 Exemplo do requirements.txt:
 
-streamlit
-🤖 Hardware Utilizado
-ESP32
-Ponte H
-Motores DC
-Chassi Rover
-Bateria
-Rede Wi-Fi local
+- streamlit
+- 🤖 Hardware Utilizado
+- ESP32
+- Ponte H
+- Motores DC
+- Chassi Rover
+- Bateria
+- Rede Wi-Fi local
+
 👨‍💻 Equipe de Desenvolvimento
-DIEGO RODRIGUES COSTA DE OLIVEIRA CASTRO
-GUSTAVO SILVA DOS ANJOS
-ISAAC BARROS DE LIMA
-JOÃO PEDRO CRUZ OLIVEIRA
-JÚLIO CESAR DOS SANTOS NASCIMENTO
+- DIEGO RODRIGUES COSTA DE OLIVEIRA CASTRO
+- GUSTAVO SILVA DOS ANJOS
+- ISAAC BARROS DE LIMA
+- JOÃO PEDRO CRUZ OLIVEIRA
+- JÚLIO CESAR DOS SANTOS NASCIMENTO
 📄 Licença
 
 Projeto desenvolvido para fins educacionais.
