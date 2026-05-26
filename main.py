@@ -1,6 +1,8 @@
 import streamlit as st
 import sqlite3
 import socket
+import subprocess
+import sys 
 
 st.set_page_config(
     page_title="Projeto Rover Lunar",
@@ -10,15 +12,15 @@ st.set_page_config(
 
 # CONEXÃO SOCKET
 
-if "cliente" not in st.session_state:
-    try:
-        cliente = socket.socket()
-        cliente.settimeout(2.0) 
-        cliente.connect(("192.168.0.116", 5000))  # trocar pelo IP do rover
-        st.session_state.cliente = cliente
+#if "cliente" not in st.session_state:
+    #try:
+        #cliente = socket.socket()
+       # cliente.settimeout(2.0) 
+        #cliente.connect(("192.168.0.116", 5000))  # trocar pelo IP do rover
+        #st.session_state.cliente = cliente
 
-    except Exception as e:
-        st.session_state.cliente = None
+    #except Exception as e:
+        #st.session_state.cliente = None
         
 
 # BANCO DE DADOS (rover.db)
@@ -273,64 +275,28 @@ elif st.session_state.pagina == "painel":
                 st.success("Rover cadastrado com sucesso!")
 
    
-    # ÁREA DE CONTROLE 
+    # =======================================================
+    # ÁREA DE CONTROLE (AQUI FOI ONDE A MÁGICA ACONTECEU)
+    # =======================================================
     elif menu == "Área de Controle":
         st.title("🎮 Área de Controle")
-        cliente = st.session_state.get("cliente", None)
+        st.info("Controle o seu Rover em tempo real usando o teclado (WASD).")
 
-        col1, col2, col3 = st.columns(3)
-
-        with col2:
-            if st.button("⬆ FRENTE", use_container_width=True):
-                if cliente:
-                    try:
-                        cliente.send(b"w")
-                        st.success("Frente enviada")
-                    except:
-                        st.error("Erro ao enviar comando.")
-
-        with col1:
-            if st.button("⬅ ESQUERDA", use_container_width=True):
-                if cliente:
-                    try:
-                        cliente.send(b"a")
-                        st.success("Esquerda enviada")
-                    except:
-                        st.error("Erro ao enviar comando.")
-
-        with col3:
-            if st.button("➡ DIREITA", use_container_width=True):
-                if cliente:
-                    try:
-                        cliente.send(b"d")
-                        st.success("Direita enviada")
-                    except:
-                        st.error("Erro ao enviar comando.")
-
-        col4, col5, col6 = st.columns(3)
-
-        with col5:
-            if st.button("⬇ TRÁS", use_container_width=True):
-                if cliente:
-                    try:
-                        cliente.send(b"s")
-                        st.success("Ré enviada")
-                    except:
-                        st.error("Erro ao enviar comando.")
-
-        if st.button("🛑 PARAR", use_container_width=True):
-            if cliente:
-                try:
-                    cliente.send(b"p")
-                    st.error("Rover parado")
-                except:
-                    st.error("Erro ao enviar comando.")
+        # Botão para abrir o script controle.py do seu professor
+        if st.button("Abrir Controle (Nova Janela)", use_container_width=True):
+            try:
+                subprocess.Popen([sys.executable, "controle.py"])
+                st.success("A janela de controle foi aberta! Clique nela para pilotar o Rover.")
+            except Exception as e:
+                # Caso ocorra erro por estar no macOS/Linux e precisar chamar 'python3', ou arquivo não encontrado.
+                st.error(f"Erro ao tentar abrir o controle: {e}")
 
         st.markdown("---")
-        st.subheader("📡 Status do Sistema")
+        st.subheader("📡 Status do Sistema (Painel)")
         
+        cliente = st.session_state.get("cliente", None)
         if cliente:
-            st.write("✅ Comunicação ativa")
+            st.write("✅ Comunicação web ativa")
             st.write("📶 Rede LAN conectada")
             st.write("🤖 Rover online")
         else:
