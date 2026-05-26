@@ -65,7 +65,7 @@ O sistema utiliza comunicação TCP/IP.
 
 O Streamlit envia comandos:
 
-```python
+
 w = frente
 s = trás
 a = esquerda
