@@ -260,21 +260,18 @@ elif st.session_state.pagina == "painel":
                 ))
                 st.success("Rover cadastrado com sucesso!")
 
-   
-    # =======================================================
-    # ÁREA DE CONTROLE (AQUI FOI ONDE A MÁGICA ACONTECEU)
-    # =======================================================
+
+    # ÁREA DE CONTROLE
+  
     elif menu == "Área de Controle":
         st.title("🎮 Área de Controle")
         st.info("Controle o seu Rover em tempo real usando o teclado (WASD).")
 
-        # Botão para abrir o script controle.py do seu professor
         if st.button("Abrir Controle (Nova Janela)", use_container_width=True):
             try:
                 subprocess.Popen([sys.executable, "controle.py"])
                 st.success("A janela de controle foi aberta! Clique nela para pilotar o Rover.")
             except Exception as e:
-                # Caso ocorra erro por estar no macOS/Linux e precisar chamar 'python3', ou arquivo não encontrado.
                 st.error(f"Erro ao tentar abrir o controle: {e}")
 
         st.markdown("---")
